@@ -1,14 +1,6 @@
-0x01. Basic Authentication
-==========================
-
-
-
-0x01-Basic_authentication/api/v1/app.py
-----------------------------------------
-
 #!/usr/bin/env python3
 """
-Route module for the API
+new error handler for this status code
 """
 from os import getenv
 from api.v1.views import app_views
@@ -28,11 +20,13 @@ elif os.getenv('AUTH_TYPE') == 'basic_auth':
     from api.v1.auth.basic_auth import BasicAuth
     auth = BasicAuth()
 
+
 @app.errorhandler(404)
 def not_found(error) -> str:
     """ Not found handler
     """
     return jsonify({"error": "Not found"}), 404
+
 
 @app.errorhandler(401)
 def unauthorized(error) -> str:
@@ -62,6 +56,7 @@ def before_request() -> None:
         abort(401)
     if not auth.current_user(request):
         abort(403)
+
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
