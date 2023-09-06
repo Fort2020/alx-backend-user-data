@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Module of session auth views
+""" module session auth views
 """
 from api.v1.views import app_views
 from flask import abort, jsonify, request

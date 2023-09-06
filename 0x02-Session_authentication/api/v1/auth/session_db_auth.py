@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SessionDBAuth class to manage API authentication
+manage API authentication
 """
 from api.v1.auth.session_exp_auth import SessionExpAuth
 from models.user_session import UserSession
@@ -9,12 +9,11 @@ from datetime import datetime, timedelta
 
 
 class SessionDBAuth(SessionExpAuth):
-    """SessionExpAuth class to manage API authentication
+    """session DB auth class to manage API authentication
     """
 
     def create_session(self, user_id=None):
-        """Create session
-        """
+        """create session"""
         if user_id:
             session_id = super().create_session(user_id)
             us = UserSession(user_id=user_id, session_id=session_id)
@@ -23,7 +22,7 @@ class SessionDBAuth(SessionExpAuth):
             return session_id
 
     def user_id_for_session_id(self, session_id=None):
-        """Get user ID from session
+        """get user ID from session
         """
         if not session_id:
             return None
@@ -36,7 +35,7 @@ class SessionDBAuth(SessionExpAuth):
             return u.user_id
 
     def destroy_session(self, request=None):
-        """Delete the user session / log out
+        """delete the user session / log out
         """
         if request:
             session_id = self.session_cookie(request)

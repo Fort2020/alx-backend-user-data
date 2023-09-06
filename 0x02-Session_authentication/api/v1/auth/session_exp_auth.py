@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-SessionExpAuth class to manage API authentication
+manage API authentication
 """
 from api.v1.auth.session_auth import SessionAuth
 from os import getenv
@@ -8,11 +8,11 @@ from datetime import datetime, timedelta
 
 
 class SessionExpAuth(SessionAuth):
-    """SessionExpAuth class to manage API authentication
+    """session exp auth class to manage API authentication
     """
 
     def __init__(self):
-        """Initialize SessionExpAuth
+        """initialize session exp auth
         """
         try:
             self.session_duration = int(getenv('SESSION_DURATION'))
@@ -20,7 +20,7 @@ class SessionExpAuth(SessionAuth):
             self.session_duration = 0
 
     def create_session(self, user_id=None):
-        """Create session
+        """create session
         """
         session_id = super().create_session(user_id)
         if session_id:
@@ -29,7 +29,7 @@ class SessionExpAuth(SessionAuth):
             return session_id
 
     def user_id_for_session_id(self, session_id=None):
-        """Get user ID from session
+        """get user ID from session
         """
         if not session_id:
             return None

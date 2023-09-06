@@ -13,7 +13,7 @@ class Auth:
     """ manage API authentication """
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """Check if path is in the list of excluded paths
+        """ check if path is in the list of excluded paths
         """
         if not path or not excluded_paths:
             return True
@@ -25,19 +25,17 @@ class Auth:
         return True
 
     def authorization_header(self, request=None) -> str:
-        """Return authorization header
-        """
+        """return authorization header"""
         if not request:
             return None
         return request.headers.get('Authorization')
 
     def current_user(self, request=None) -> TypeVar('User'):
-        """Return None
-        """
+        """return none"""
         return None
 
     def session_cookie(self, request=None):
-        """Return a cookie value from a request
+        """return cookie value from a request
         """
         if request:
             return request.cookies.get(getenv('SESSION_NAME'))
